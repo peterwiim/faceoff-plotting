@@ -74,7 +74,7 @@ filterPlayer <- function(name){
 
 # This reads the file into pbp_file. You'll have to change this to what your filename is. Save it 
 # in your working directory.
-pbp_file <- read_csv("EW5v5FODetroit.csv")
+pbp_file <- read_csv("EWFODetroit5v410-3to11-8.csv")
 
 game_file <- pbp_file %>%
   filter(event_type %in% c('FAC')) %>%
@@ -143,13 +143,13 @@ game_file$dotLocation <- st.which_circle(game_file$x,game_file$y)
 #faceoff_file <- filterPlayer('DYLAN.LARKIN')
 
 # Filter for Andreas Athanasiou
-faceoff_file <- filterPlayer('ANDREAS.ATHANASIOU')
+#faceoff_file <- filterPlayer('ANDREAS.ATHANASIOU')
 
 # Filter for Frans Nielsen
 #faceoff_file <- filterPlayer('FRANS.NIELSEN')
 
 # If you want the whole team, uncomment this next line, and comment out the above line. 
-#faceoff_file <- temp_file
+faceoff_file <- game_file
 
 # This creates a separate dataframe for each faceoff dot. 
 faceoff_file_dot1 <- faceoff_file %>% filter(dotLocation == 1)
@@ -219,14 +219,14 @@ rink <- fun.draw_rink() + coord_fixed()
 
 faceoff_plot <- rink +
   geom_text(data=faceoff, size=2, aes(x=x,y=y,label=paste(WinPerc,"%","\n",Taken,"taken"))) +
-  ggtitle("  Detroit Red Wings 2018-19 5v5 Faceoff Win %", 
+  ggtitle("  Detroit Red Wings 2018-19 5v4 Faceoff Win% 10/3 - 11.8", 
           subtitle = "  Detroit attacks to the right. No number means no faceoffs taken at that circle") +
   labs(caption = "by Peter Flynn @pflynnhockey   ")
 theme(plot.title=element_text(size=14, color="black")) +
   theme(plot.subtitle=element_text(size=10, color="black"))
 
 # Full Team
-png("~/Desktop/Detroit5v5FaceoffsTestEW.png", units="px", width=1800, height=1957, res=300)
+png("~/Desktop/Detroit5v4FaceoffsOct3toNov8.png", units="px", width=1800, height=1957, res=300)
 print(faceoff_plot)
 dev.off()
 
